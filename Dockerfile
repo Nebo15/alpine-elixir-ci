@@ -78,7 +78,7 @@ RUN printf '#!/bin/sh\nXvfb :99 -screen 0 1280x1024x24 &\nexec "$@"\n' > /tmp/en
 
 # Circleci user
 RUN addgroup -g 3434 circleci \
-  && adduser -D -u 3434 -G circleci -s /bin/bash circleci \
+  && adduser -D -u 3434 -G circleci -h /home/circleci -s /bin/bash circleci \
   && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
   && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' >> /etc/sudoers.d/env_keep
 
@@ -88,6 +88,8 @@ LABEL com.circleci.preserve-entrypoint=true
 EXPOSE 9222
 
 USER circleci
+
+WORKDIR /home/circleci
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
