@@ -89,6 +89,7 @@ EXPOSE 9222
 
 USER circleci
 
+ENV HOME=/home/circleci
 WORKDIR /home/circleci
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
