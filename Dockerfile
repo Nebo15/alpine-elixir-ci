@@ -38,7 +38,9 @@ RUN apk add --no-cache --update --virtual .elixir-ci \
       yarn \
       gconf \
       chromium \
-      chromium-chromedriver
+      chromium-chromedriver \
+      libc-dev \
+      gcc
 
 # Smoke tests
 RUN jq --version
