@@ -1,4 +1,4 @@
-FROM nebo15/alpine-elixir:1.7.4-otp21.1.3
+FROM nebo15/alpine-elixir:1.8.1-otp21.2.5
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Important! Update this no-op ENV variable when this Dockerfile
