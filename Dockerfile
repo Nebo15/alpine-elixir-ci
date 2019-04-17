@@ -1,4 +1,4 @@
-FROM nebo15/alpine-elixir:1.8.1-otp21.2.5
+FROM nebo15/alpine-elixir:1.8.1-otp21.3.5
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Important! Update this no-op ENV variable when this Dockerfile
@@ -40,7 +40,8 @@ RUN apk add --no-cache --update --virtual .elixir-ci \
       chromium \
       chromium-chromedriver \
       libc-dev \
-      gcc
+      gcc \
+      postgresql-client
 
 # Smoke tests
 RUN jq --version
