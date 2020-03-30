@@ -41,6 +41,7 @@ RUN apk add --no-cache --update --virtual .elixir-ci \
       chromium-chromedriver \
       libc-dev \
       gcc \
+      g++ \
       postgresql-client
 
 # Smoke tests
