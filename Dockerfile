@@ -72,6 +72,11 @@ RUN set -x && \
     chmod a+rx /usr/local/bin/docker-compose && \
     docker-compose version
 
+# Install gcloud
+
+RUN curl -sSL https://sdk.cloud.google.com | bash
+ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
 # start xvfb automatically to avoid needing to express in circle.yml
 ENV DISPLAY :99
 RUN printf '#!/bin/sh\nXvfb :99 -screen 0 1280x1024x24 &\nexec "$@"\n' > /tmp/entrypoint \
