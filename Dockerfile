@@ -77,8 +77,25 @@ RUN set -x && \
 
 # Install gcloud
 
-RUN curl -sSL https://sdk.cloud.google.com | bash
-ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+RUN export CLOUDSDK_INSTALL_DIR=/usr/local/gcloud && \
+    curl -sSL https://sdk.cloud.google.com | bash
+ENV PATH ${PATH}:/usr/local/gcloud/google-cloud-sdk/bin:/usr/bin:
+
+# Install kubectl
+
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+    chmod +x ./kubectl && \
+    mv ./kubectl /usr/local/bin/kubectl
+
+# Install Helm
+
+ENV HELM_VERSION=3.2.1
+RUN curl -L https://get.helm.sh/"helm-v${HELM_VERSION}-linux-amd64.tar.gz" |tar xvz && \
+    mv linux-amd64/helm /usr/bin/helm && \
+    chmod +x /usr/bin/helm && \
+    rm -rf linux-amd64 && \
+    apk del curl && \
+    rm -f /var/cache/apk/*
 
 # Install Terraform
 
