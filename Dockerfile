@@ -40,7 +40,10 @@ RUN apk add --no-cache --update --virtual .elixir-ci \
       libc-dev \
       gcc \
       g++ \
-      postgresql-client
+      postgresql-client \
+      git-crypt \
+      python3 \
+      netcat-openbsd
 
 # Smoke tests
 RUN jq --version
@@ -74,9 +77,19 @@ RUN set -x && \
 
 # Install gcloud
 
-RUN apk add --no-cache --update --virtual .gcloud-ci python3
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
+# Install Terraform
+
+RUN git clone https://github.com/tfutils/tfenv.git "${HOME}/.tfenv" && \
+    ln -s ${HOME}/.tfenv/bin/* /usr/local/bin && \
+    tfenv install 0.14.4
+
+# Install ktl
+
+RUN git clone https://github.com/nebo15/k8s-utils.git "${HOME}/.k8s-utils" && \
+    ln -s ${HOME}/.k8s-utils/ktl.sh /usr/local/bin/ktl
 
 # start xvfb automatically to avoid needing to express in circle.yml
 ENV DISPLAY :99
