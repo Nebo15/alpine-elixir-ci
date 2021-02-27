@@ -74,6 +74,7 @@ RUN set -x && \
 
 # Install gcloud
 
+RUN apk add --no-cache --update --virtual .gcloud-ci python3
 RUN curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 
