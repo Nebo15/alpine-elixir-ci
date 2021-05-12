@@ -1,10 +1,10 @@
-FROM nebo15/alpine-elixir:1.11.2-otp23.1.4
+FROM nebo15/alpine-elixir:1.11.4-otp23.3.4
 
 # Important! Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2020-08-28
+ENV REFRESHED_AT=2021-05-12
 
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
@@ -14,7 +14,7 @@ RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 ENV PATH=${PATH}:/usr/bin
 
-RUN apk add --no-cache --update --virtual .elixir-ci \
+RUN apk add --no-cache --update-cache --virtual .elixir-ci \
       git \
       make \
       xvfb \
