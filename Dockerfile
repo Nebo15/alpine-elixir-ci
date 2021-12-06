@@ -43,7 +43,13 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci \
       postgresql-client \
       git-crypt \
       python3 \
-      netcat-openbsd
+      netcat-openbsd \ 
+      graphicsmagick \
+      msttcorefonts-installer fontconfig
+
+RUN update-ms-fonts && \
+    fc-cache -f
+      
 
 # Smoke tests
 RUN jq --version
