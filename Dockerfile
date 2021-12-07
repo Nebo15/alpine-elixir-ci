@@ -4,7 +4,7 @@ FROM nebo15/alpine-elixir:1.11.4-otp23.3.4
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2021-05-12
+ENV REFRESHED_AT=2021-11-06
 
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
@@ -65,7 +65,7 @@ RUN set -x && \
     # Install glibc on Alpine (required by docker-compose) from
     # https://github.com/sgerrand/alpine-pkg-glibc
     # See also https://github.com/gliderlabs/docker-alpine/issues/11
-    GLIBC_VERSION='2.32-r0' && \
+    GLIBC_VERSION='2.34-r0' && \
     curl -Lo /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     curl -Lo glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk && \
     curl -Lo glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-bin-$GLIBC_VERSION.apk && \
@@ -78,8 +78,7 @@ RUN set -x && \
     apk del .deps && \
     DOCKER_COMPOSE_URL=https://github.com$(curl -L https://github.com/docker/compose/releases/latest | grep -Eo 'href="[^"]+docker-compose-Linux-x86_64' | sed 's/^href="//' | head -1) && \
     curl -Lo /usr/local/bin/docker-compose $DOCKER_COMPOSE_URL && \
-    chmod a+rx /usr/local/bin/docker-compose && \
-    docker-compose version
+    chmod a+rx /usr/local/bin/docker-compose
 
 # Install gcloud
 
