@@ -1,10 +1,10 @@
-FROM nebo15/alpine-elixir:1.11.4-otp23.3.4
+FROM nebo15/alpine-elixir:1.13.2-otp23.3.4.10
 
 # Important! Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2021-11-06
+ENV REFRESHED_AT=2022-01-15
 
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
@@ -50,7 +50,6 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci \
 RUN update-ms-fonts && \
     fc-cache -f
       
-
 # Smoke tests
 RUN jq --version
 RUN chromedriver --version
@@ -106,7 +105,7 @@ RUN curl -L https://get.helm.sh/"helm-v${HELM_VERSION}-linux-amd64.tar.gz" |tar 
 
 RUN git clone https://github.com/tfutils/tfenv.git "${HOME}/.tfenv" && \
     ln -s ${HOME}/.tfenv/bin/* /usr/local/bin && \
-    tfenv install 0.14.4
+    tfenv install 1.0.6
 
 # Install ktl
 
