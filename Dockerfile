@@ -35,7 +35,7 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci \
       docker \
       nodejs \
       yarn \
-      chromium-chromedriver \
+      chromium chromium-chromedriver \
       libc-dev \
       gcc \
       g++ \
