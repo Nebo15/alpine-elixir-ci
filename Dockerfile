@@ -14,7 +14,7 @@ RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 ENV PATH=${PATH}:/usr/bin
 
-RUN apk add --no-cache --update-cache --virtual .elixir-ci \
+RUN apk add --no-cache --update-cache --virtual .elixir-ci  \
       git \
       make \
       xvfb \
@@ -35,7 +35,6 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci \
       docker \
       nodejs \
       yarn \
-      chromium=93.0.4577.82-r2 chromium-chromedriver=93.0.4577.82-r2 \
       libc-dev \
       gcc \
       g++ \
@@ -45,6 +44,9 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci \
       netcat-openbsd \ 
       graphicsmagick \
       msttcorefonts-installer fontconfig
+      
+RUN apk add --no-cache --update-cache --virtual .acceptance-ci \
+    chromium chromium-chromedriver
 
 RUN update-ms-fonts && \
     fc-cache -f
