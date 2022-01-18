@@ -46,7 +46,7 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci  \
       msttcorefonts-installer fontconfig
       
 RUN apk add --no-cache --update-cache --virtual .acceptance-ci \
-    chromium chromium-chromedriver
+    chromium chromium-chromedriver gtk+3.0
 
 RUN update-ms-fonts && \
     fc-cache -f
