@@ -86,11 +86,10 @@ RUN export CLOUDSDK_INSTALL_DIR=/usr/local/gcloud && \
     curl -sSL https://sdk.cloud.google.com | bash
 ENV PATH ${PATH}:/usr/local/gcloud/google-cloud-sdk/bin:/usr/bin:
 
-# Install kubectl
+# Install kubectl with auth plugin
 
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
-    chmod +x ./kubectl && \
-    mv ./kubectl /usr/local/bin/kubectl
+RUN gcloud components install kubectl && \
+    gcloud components install gke-gcloud-auth-plugin
 
 # Install Helm
 
