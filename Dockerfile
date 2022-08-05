@@ -105,7 +105,8 @@ RUN curl -L https://get.helm.sh/"helm-v${HELM_VERSION}-linux-amd64.tar.gz" |tar 
 
 RUN git clone https://github.com/tfutils/tfenv.git "${HOME}/.tfenv" && \
     ln -s ${HOME}/.tfenv/bin/* /usr/local/bin && \
-    tfenv install 1.1.9
+    mkdir -p ${HOME}/.tfenv/versions && \
+    chmod -R 777 ${HOME}/.tfenv
 
 # Install ktl
 
