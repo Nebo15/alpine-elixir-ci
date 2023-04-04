@@ -1,10 +1,10 @@
-FROM nebo15/alpine-elixir:1.13.4-otp-25
+FROM nebo15/alpine-elixir:1.14.4-otp-25.3
 
 # Important! Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2022-05-24
+ENV REFRESHED_AT=2023-04-04
 
 # Set timezone to UTC by default
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
@@ -70,7 +70,8 @@ RUN set -x && \
     curl -Lo glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk && \
     curl -Lo glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-bin-$GLIBC_VERSION.apk && \
     apk update && \
-    apk add glibc.apk glibc-bin.apk && \
+    # added --force-overwrite flag, ref: https://github.com/sgerrand/alpine-pkg-glibc/issues/185
+    apk add --force-overwrite glibc.apk glibc-bin.apk && \
     rm -rf /var/cache/apk/* && \
     rm glibc.apk glibc-bin.apk && \
     \
@@ -93,7 +94,7 @@ RUN gcloud components install kubectl && \
 
 # Install Helm
 
-ENV HELM_VERSION=3.2.1
+ENV HELM_VERSION=3.11.1
 RUN curl -L https://get.helm.sh/"helm-v${HELM_VERSION}-linux-amd64.tar.gz" |tar xvz && \
     mv linux-amd64/helm /usr/bin/helm && \
     chmod +x /usr/bin/helm && \
