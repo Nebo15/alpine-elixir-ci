@@ -38,6 +38,7 @@ RUN apk add --no-cache --update-cache --virtual .elixir-ci  \
       libc-dev \
       gcc \
       g++ \
+      build-essential \
       postgresql-client \
       git-crypt \
       python3 \
