@@ -14,6 +14,21 @@ RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 ENV PATH=${PATH}:/usr/bin
 
+RUN apk add --no-cache --update-cache --virtual .libexecinfo \ 
+    git \
+    g++ \
+    make \
+    cmake \
+    libtool \ 
+    automake && \
+    git clone https://github.com/ronchaine/libexecinfo.git && \
+    cd libexecinfo && \
+    make && \
+    make install && \
+    apk del .libexecinfo && \
+    cd .. && \
+    rm -rf libexecinfo
+
 RUN apk add --no-cache --update-cache --virtual .elixir-ci  \
       git \
       make \
